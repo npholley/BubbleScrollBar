@@ -14,5 +14,7 @@
         <attr name="bubbleTextColor" format="color"/>
         <attr name="bubbleMinWidth" format="dimension"/>
         <attr name="bubbleHeight" format="dimension"/>
+
+        <attr name="allowScrollOutside" format="boolean"/>
     </declare-styleable>
 </resources>
