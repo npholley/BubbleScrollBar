@@ -20,12 +20,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.trendyol.bubblescrollbarlib.animation.VerticalBubbleScrollBarAnimationManager
 import com.trendyol.bubblescrollbarlib.layoutmanager.VerticalBubbleScrollBarLayoutManager
-import com.trendyol.common.getDimensionOrDefaultInPixelSize
 import com.trendyol.bubblescrollbarlib.BubbleScrollbarState.*
 import com.trendyol.bubblescrollbarlib.animation.BubbleScrollBarAnimationManager
 import com.trendyol.bubblescrollbarlib.layoutmanager.BubbleScrollBarLayoutManager
-import com.trendyol.common.dpToPx
-import com.trendyol.common.isInViewRect
 
 class BubbleScrollBar : FrameLayout {
     private val thumbPosition = Point()
@@ -135,6 +132,8 @@ class BubbleScrollBar : FrameLayout {
 
     private var thumbBackground: Drawable? = null
 
+    private var allowScrollOutside: Boolean = false
+
     private fun obtainStyledAttributes(attrs: AttributeSet? = null, defStyleAttr: Int = 0, defStyleRes: Int = 0) {
         with(context.theme.obtainStyledAttributes(attrs, R.styleable.BubbleScrollBar, defStyleAttr, defStyleRes)) {
             scrollBarBackground = getDrawable(R.styleable.BubbleScrollBar_scrollbarBackground)
@@ -172,6 +171,7 @@ class BubbleScrollBar : FrameLayout {
                 R.styleable.BubbleScrollBar_bubbleHeight,
                 R.dimen.default_bubble_height
             )
+            allowScrollOutside = getBoolean(R.styleable.BubbleScrollBar_allowScrollOutside, false)
             return@with
         }
 
@@ -275,7 +275,7 @@ class BubbleScrollBar : FrameLayout {
     }
 
     private fun shouldContinueFastScrolling(event: MotionEvent): Boolean {
-        return event.action == MotionEvent.ACTION_MOVE && isEventInScrollBarPosition(event)
+        return event.action == MotionEvent.ACTION_MOVE && (allowScrollOutside || isEventInScrollBarPosition(event))
     }
 
     private fun shouldStartFastScrolling(event: MotionEvent): Boolean {
