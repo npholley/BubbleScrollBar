@@ -20,12 +20,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.trendyol.bubblescrollbarlib.animation.VerticalBubbleScrollBarAnimationManager
 import com.trendyol.bubblescrollbarlib.layoutmanager.VerticalBubbleScrollBarLayoutManager
-import com.trendyol.common.getDimensionOrDefaultInPixelSize
 import com.trendyol.bubblescrollbarlib.BubbleScrollbarState.*
 import com.trendyol.bubblescrollbarlib.animation.BubbleScrollBarAnimationManager
 import com.trendyol.bubblescrollbarlib.layoutmanager.BubbleScrollBarLayoutManager
-import com.trendyol.common.dpToPx
-import com.trendyol.common.isInViewRect
 
 class BubbleScrollBar : FrameLayout {
     private val thumbPosition = Point()
